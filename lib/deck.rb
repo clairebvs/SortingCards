@@ -3,15 +3,13 @@ require './lib/card'
 class Deck
   attr_reader :cards
 
-  def initialize(card)
-    @cards = []
+  def initialize(cards)
+    @cards = cards
+    @count_card = 0
   end
 
-  def add_cards
-    @cards << 
+  def count
+    @cards.count
   end
-  # def add_cards(cards)
-  #   @cards << cards.value.suit
-  # end
 
 end
