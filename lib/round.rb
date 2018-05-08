@@ -1,4 +1,5 @@
- require "./lib/card"
+ # require "./lib/card"
+ # require './lib/guess'
 
 class Round
   attr_reader :deck,
@@ -19,5 +20,7 @@ class Round
     @guesses << question
   end
 
-
+  def first
+    first_guess = @guesses[0]
+  end
 end
