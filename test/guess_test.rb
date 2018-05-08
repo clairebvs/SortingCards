@@ -62,10 +62,7 @@ class GuessTest < Minitest::Test
     guess2 = Guess.new("2 of Diamonds", card2)
 
     assert_equal "Correct!", guess.feedback
-    assert_equal "Incorrect.", guess2.feedback 
+    assert_equal "Incorrect.", guess2.feedback
   end
 
-
-  # guess.feedback
-  # => "Incorrect."
 end

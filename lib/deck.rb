@@ -5,7 +5,6 @@ class Deck
 
   def initialize(cards)
     @cards = cards
-    @count_card = 0
   end
 
   def count
