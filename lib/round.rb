@@ -14,5 +14,10 @@ class Round
     @deck.cards[@index_start]
   end
 
+  def record_guess(response)
+    question = Guess.new(response, current_card)
+    @guesses << question
+  end
+
 
 end

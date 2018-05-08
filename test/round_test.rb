@@ -47,6 +47,19 @@ class RoundTest < Minitest::Test
     assert_instance_of Card, round.current_card
   end
 
+  def test_round_has_a_record_guess
+    card_1 = Card.new("3","Hearts")
+    card_2 = Card.new("4", "Clubs")
+    card_3 = Card.new("5", "Diamonds")
+    deck = Deck.new([card_1, card_2, card_3])
+    round = Round.new(deck)
 
+    round.record_guess("3 of Hearts")
+    assert_equal 1, round.guesses.count
+    refute round.guesses.empty?
+    # .empty?
+    #  index
+    #  count
+  end
 
 end
