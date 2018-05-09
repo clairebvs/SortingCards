@@ -50,7 +50,6 @@ class RoundTest < Minitest::Test
   end
 
   def test_it_has_a_different_current_card
-    skip and review
     card_1 = Card.new("3","Hearts")
     card_2 = Card.new("4", "Clubs")
     card_3 = Card.new("5", "Diamonds")
@@ -76,7 +75,6 @@ class RoundTest < Minitest::Test
   end
 
   def test_round_has_a_different_guesses
-    skip
     card_1 = Card.new("3","Hearts")
     card_2 = Card.new("4", "Clubs")
     card_3 = Card.new("5", "Diamonds")
@@ -116,7 +114,7 @@ class RoundTest < Minitest::Test
     deck = Deck.new([card_1, card_2, card_3])
     round = Round.new(deck)
 
-    round.record_guess('3 of Heart')
+    round.record_guess('3 of Hearts')
 # binding.pry
     assert_equal card_2, round.current_card
   end
@@ -128,7 +126,7 @@ class RoundTest < Minitest::Test
     deck = Deck.new([card_1, card_2, card_3])
     round = Round.new(deck)
 
-    round.record_guess('3 of Heart')
+    round.record_guess('3 of Hearts')
     round.record_guess("Jack of Diamonds")
 
     assert_equal 2, round.guesses.count
@@ -141,7 +139,7 @@ class RoundTest < Minitest::Test
     deck = Deck.new([card_1, card_2, card_3])
     round = Round.new(deck)
 
-    round.record_guess('3 of Heart')
+    round.record_guess('3 of Hearts')
     round.record_guess("Jack of Diamonds")
 
     assert_equal "Incorrect.", round.guesses.last.feedback
@@ -154,7 +152,7 @@ class RoundTest < Minitest::Test
     deck = Deck.new([card_1, card_2, card_3])
     round = Round.new(deck)
 
-    round.record_guess('3 of Heart')
+    round.record_guess('3 of Hearts')
     round.record_guess("Jack of Diamonds")
 
     assert_equal 1, round.number_correct
@@ -167,10 +165,11 @@ class RoundTest < Minitest::Test
     deck = Deck.new([card_1, card_2, card_3])
     round = Round.new(deck)
 
+    round.record_guess('3 of Hearts')
+    round.record_guess("Jack of Diamonds")
+
     assert_equal 50, round.percent_correct
   end
-
-# round.percent_correct
-# => 50
 # adding number variable to card class
 end
+# adding rakefile
