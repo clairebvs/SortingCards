@@ -42,13 +42,15 @@ class RoundTest < Minitest::Test
     card_1 = Card.new("3","Hearts")
     card_2 = Card.new("4", "Clubs")
     card_3 = Card.new("5", "Diamonds")
+    guess = Guess.new("3 of Hearts", card_1)
     deck = Deck.new([card_1, card_2, card_3])
     round = Round.new(deck)
 
-    assert_instance_of Card, round.current_card
+    assert_equal card_1, round.current_card
   end
 
   def test_it_has_a_different_current_card
+    skip and review
     card_1 = Card.new("3","Hearts")
     card_2 = Card.new("4", "Clubs")
     card_3 = Card.new("5", "Diamonds")
@@ -106,14 +108,29 @@ class RoundTest < Minitest::Test
     assert_equal 1, round.number_correct
   end
 
+  def test_round_has_next_current_card
+    card_1 = Card.new("3","Hearts")
+    card_2 = Card.new("4", "Clubs")
+    card_3 = Card.new("5", "Diamonds")
+    deck = Deck.new([card_1, card_2, card_3])
+    round = Round.new(deck)
 
+    round.record_guess('3 of Heart')
+# binding.pry
+    assert_equal card_2, round.current_card
+  end
 
-  # round.number_correct
-  # => 1
-  # round.current_card
-  # => #<Card:0x007ffdf1820a90 @value="4", @suit="Clubs">
-  # round.record_guess("Jack of Diamonds")
-  # => #<Guess:0x007ffdf19c8a00 @card=#<Card:0x007ffdf1820a90 @value="4", @suit="Clubs">, @response="Jack of Diamonds">
+  def test_round_guesses_count_increase
+    card_1 = Card.new("3","Hearts")
+    card_2 = Card.new("4", "Clubs")
+    card_3 = Card.new("5", "Diamonds")
+    deck = Deck.new([card_1, card_2, card_3])
+    round = Round.new(deck)
+
+    round.record_guess('3 of Heart')
+    round.record_guess("Jack of Diamonds")
+    assert_equal 2, round.guesses.count
+  end
 # round.guesses.count
 # => 2
 # round.guesses.last.feedback

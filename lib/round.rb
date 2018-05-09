@@ -13,34 +13,32 @@ class Round
   end
 
   def current_card
+    # @index_start += 1
     @deck.cards[@index_start]
   end
 
   def record_guess(response)
     question = Guess.new(response, current_card)
     @guesses << question
-  end
-
-  def first
-    first_guess = @guesses[0]
+    @index_start += 1
   end
 
   def number_correct
-    # response = Guess.new(response, current_card)
-    # guess = Guess.new(response, current_card)
-    # x = record_guess(response)
-    # if x == guess.correct?
-    #   @correct_guess += 1
-    # end
-
-    @guesses.select do |guess|
-     if guess.correct?
-       @correct_guess += 1
-     end
+    if guesses.last.correct?
+      @correct_guess +=1
     end
-    @correct_guess
   end
-
-
+  #   @guesses.select do |guess|
+  #     if guess.correct?
+  #       @correct_guess += 1
+  #     end
+  #   end
+  #   @correct_guess
+  # end
 
 end
+
+# def first
+#   @guesses.first
+# why I do not need a method first
+# end
