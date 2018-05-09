@@ -13,7 +13,6 @@ class Round
   end
 
   def current_card
-    # @index_start += 1
     @deck.cards[@index_start]
   end
 
@@ -24,9 +23,12 @@ class Round
   end
 
   def number_correct
+   @correct_guess += 1
     if guesses.last.correct?
-      @correct_guess +=1
+      # @correct_guess +=1
+      # binding.pry
     end
+     @correct_guess
   end
   #   @guesses.select do |guess|
   #     if guess.correct?

@@ -13,18 +13,21 @@ class GuessTest < Minitest::Test
     assert_instance_of Guess, guess
   end
 
-  def test_guess_has_card
+  def test_guess_on_card
     card = Card.new("10", "Hearts")
     guess = Guess.new("10 of Hearts", card)
 
     assert_instance_of Card, guess.card
   end
 
-  def test_guess_has_different_card
+  def test_guess_on_different_card
     card2 = Card.new("Queen", "Clubs")
     guess = Guess.new("2 of Diamonds", card2)
 
-    assert_instance_of Card, card2
+    assert_instance_of Card, guess.card
+    # is an instance of the class Card enough or should it be equal to an actual card suit and value so that the test would be stronger as refactor
+
+    should say assert_equal card, guess.card
   end
 
   def test_guess_has_response
@@ -34,7 +37,7 @@ class GuessTest < Minitest::Test
     assert_equal "10 of Hearts", guess.response
   end
 
-  def test_guess_has_different_response
+  def test_guess_has_different_response_on_different_card
     card2 = Card.new("Queen", "Clubs")
     guess = Guess.new("2 of Diamonds", card2)
 

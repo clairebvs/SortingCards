@@ -129,12 +129,35 @@ class RoundTest < Minitest::Test
 
     round.record_guess('3 of Heart')
     round.record_guess("Jack of Diamonds")
+
     assert_equal 2, round.guesses.count
   end
-# round.guesses.count
-# => 2
-# round.guesses.last.feedback
-# => "Incorrect."
+
+  def test_feedback_for_second_round
+    card_1 = Card.new("3","Hearts")
+    card_2 = Card.new("4", "Clubs")
+    card_3 = Card.new("5", "Diamonds")
+    deck = Deck.new([card_1, card_2, card_3])
+    round = Round.new(deck)
+
+    round.record_guess('3 of Heart')
+    round.record_guess("Jack of Diamonds")
+
+    assert_equal "Incorrect.", round.guesses.last.feedback
+  end
+
+  def test_number_correct_is_still_1
+    card_1 = Card.new("3","Hearts")
+    card_2 = Card.new("4", "Clubs")
+    card_3 = Card.new("5", "Diamonds")
+    deck = Deck.new([card_1, card_2, card_3])
+    round = Round.new(deck)
+
+    round.record_guess('3 of Heart')
+    round.record_guess("Jack of Diamonds")
+
+    assert_equal 1, round.number_correct
+  end
 # round.number_correct
 # => 1
 # round.percent_correct
