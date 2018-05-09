@@ -93,6 +93,7 @@ class RoundTest < Minitest::Test
     round = Round.new(deck)
 
     round.record_guess("3 of Hearts")
+    # assert_instance_of Guess, round.record_guess("3 of Hearts")
     assert_equal 1, round.guesses.count
     assert_equal "Correct!", round.guesses.first.feedback
   end
@@ -158,8 +159,17 @@ class RoundTest < Minitest::Test
 
     assert_equal 1, round.number_correct
   end
-# round.number_correct
-# => 1
+
+  def test_can_count_percent_of_correct_response
+    card_1 = Card.new("3","Hearts")
+    card_2 = Card.new("4", "Clubs")
+    card_3 = Card.new("5", "Diamonds")
+    deck = Deck.new([card_1, card_2, card_3])
+    round = Round.new(deck)
+
+    assert_equal 50, round.percent_correct
+  end
+
 # round.percent_correct
 # => 50
 # adding number variable to card class

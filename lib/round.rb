@@ -1,5 +1,5 @@
- require "./lib/card"
- require './lib/guess'
+ # require "./lib/card"
+ # require './lib/guess'
 
 class Round
   attr_reader :deck,
@@ -23,12 +23,18 @@ class Round
   end
 
   def number_correct
-   @correct_guess += 1
-    if guesses.last.correct?
-      # @correct_guess +=1
-      # binding.pry
+    @correct_guess += 1
+    if @guesses.last.correct?
+         @correct_guess
     end
-     @correct_guess
+      @correct_guess
+  end
+
+  def percent_correct
+    (@correct_guess / @guesses.count ) * 100.00
+    binding.pry
+    # y = x * 100
+
   end
   #   @guesses.select do |guess|
   #     if guess.correct?
@@ -37,10 +43,4 @@ class Round
   #   end
   #   @correct_guess
   # end
-
 end
-
-# def first
-#   @guesses.first
-# why I do not need a method first
-# end
