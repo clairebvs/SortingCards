@@ -67,11 +67,11 @@ class RoundTest < Minitest::Test
     guess = Guess.new("3 of Hearts", card_1)
     deck = Deck.new([card_1, card_2, card_3])
     round = Round.new(deck)
-    assert_equal "3 of Hearts", guess.response
-    round.record_guess("3 of Hearts")
-    question = Guess.new(response, current_card)
-    assert_equal question, round.record_guess("3 of Hearts")
-    # brian : you need an assert_equal
+
+    guess1 = round.record_guess('3 of Hearts')
+
+    assert_equal '3 of Hearts', round.guesses[0].response
+
     assert_equal 1, round.guesses.count
     refute round.guesses.empty?
   end
@@ -120,6 +120,20 @@ class RoundTest < Minitest::Test
 # binding.pry
     assert_equal card_2, round.current_card
   end
+
+  def test_record_next_guess
+    card_1 = Card.new("3","Hearts")
+    card_2 = Card.new("4", "Clubs")
+    card_3 = Card.new("5", "Diamonds")
+    deck = Deck.new([card_1, card_2, card_3])
+    round = Round.new(deck)
+
+    guess1 = round.record_guess('3 of Hearts')
+    guess2 = round.record_guess('Jack of Diamonds')
+
+    assert_equal 'Jack of Diamonds', round.guesses[1].response
+  end
+
 
   def test_round_guesses_count_increase
     card_1 = Card.new("3","Hearts")

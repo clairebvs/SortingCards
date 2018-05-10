@@ -12,28 +12,53 @@ class Deck
   end
 
   def sort
-    while @cards == @cards.empty?
-      x = @cards.max_by do |card|
-        binding.pry
-        card.value
+    array_sort = []
+    until @cards.length == 0
+     # loop do
+    x = @cards.max_by do |card|
+         card.value
         end
-    array_sort = Array.new
+      x
+    array_sort.unshift(x)
     @cards.delete(x)
-    array_sort.push(x)
-      y = @cards.max_by do |card|
-        card.value
-        end
-      y
-    @cards.delete(y)
-    array_sort.unshift(y)
-      z = @cards.max_by do |card|
-        card.value
-        end
-      z
-    @cards.delete(z)
-    array_sort.unshift(z)
+    end
+
+
+    #   y = @cards.max_by do |card|
+    #     card.value
+    #     end
+    #   y
+    # @cards.delete(y)
+    # array_sort.unshift(y)
+    #   z = @cards.max_by do |card|
+    #     card.value
+    #     end
+    #   z
+    # @cards.delete(z)
+    # array_sort.unshift(z)
+    array_sort
+    # binding.pry
   end
-  array_sort
-  end
+
+  # def sort
+  #   x = @cards.length
+  #
+  #   loop do
+  #     swapped = false
+  #
+  #     (x-1).times do |i|
+  #       if array[i] > array[i+1]
+  #         array[i], array[i+1] = array[i+1], array[i]
+  #         swapped = true
+  #       end
+  #     end
+  #
+  #     break if not swapped
+  #   end
+  #   x
+  # end
+    # binding.pry
+
+
 
 end
