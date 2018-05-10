@@ -1,9 +1,8 @@
-require “rake”
-require ‘rake/testtask’
+# require “rake”
+# require ‘rake/testtask’
+require './test/round_test'
+require './test/card_test'
+require './test/deck_test'
+require './test/guess_test'
 
-Rake::TestTask.new do |t|
- t.test_files = FileList[‘test/*_test.rb’]
- t.verbose = true
-end
-
-task :default => [:test]
+task :default => :spec
