@@ -24,6 +24,7 @@ class Round
       @number_correct += 1
     end
     @index_start += 1
+    # binding.pry
   end
 
   # def number_correct
@@ -37,8 +38,6 @@ class Round
 
   def percent_correct
     ((@number_correct.to_f / @guesses.length.to_f ) * 100)
-    # y = x * 100
-
   end
   #   @guesses.select do |guess|
   #     if guess.correct?

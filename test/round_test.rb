@@ -49,16 +49,16 @@ class RoundTest < Minitest::Test
     assert_equal card_1, round.current_card
   end
 
-  def test_it_has_a_different_current_card
-    card_1 = Card.new("3","Hearts")
-    card_2 = Card.new("4", "Clubs")
-    card_3 = Card.new("5", "Diamonds")
-    deck = Deck.new([card_1, card_2, card_3])
-    round = Round.new(deck)
-    current_card = card_2
-
-    assert_instance_of Card, round.current_card
-  end
+  # def test_it_has_a_different_current_card
+  #   card_1 = Card.new("3","Hearts")
+  #   card_2 = Card.new("4", "Clubs")
+  #   card_3 = Card.new("5", "Diamonds")
+  #   deck = Deck.new([card_1, card_2, card_3])
+  #   round = Round.new(deck)
+  #   current_card = card_2
+  #
+  #   assert_equal card_2, round.current_card
+  # end
 
   def test_round_can_record_guess
     card_1 = Card.new("3","Hearts")
@@ -67,9 +67,11 @@ class RoundTest < Minitest::Test
     guess = Guess.new("3 of Hearts", card_1)
     deck = Deck.new([card_1, card_2, card_3])
     round = Round.new(deck)
-
     assert_equal "3 of Hearts", guess.response
     round.record_guess("3 of Hearts")
+    question = Guess.new(response, current_card)
+    assert_equal question, round.record_guess("3 of Hearts")
+    # brian : you need an assert_equal
     assert_equal 1, round.guesses.count
     refute round.guesses.empty?
   end
@@ -170,6 +172,9 @@ class RoundTest < Minitest::Test
 
     assert_equal 50, round.percent_correct
   end
+
+
 # adding number variable to card class
+
 end
 # adding rakefile
