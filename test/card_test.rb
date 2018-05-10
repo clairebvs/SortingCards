@@ -1,6 +1,5 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require 'pry'
 require './lib/card'
 
 class CardTest < Minitest::Test
@@ -16,6 +15,6 @@ class CardTest < Minitest::Test
 
     assert_equal "Ace", card.value
     assert_equal "Spades", card.suit
-  end 
+  end
 
 end

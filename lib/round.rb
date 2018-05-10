@@ -1,6 +1,3 @@
- # require "./lib/card"
- # require './lib/guess'
-
 class Round
   attr_reader :deck,
               :guesses,
@@ -24,26 +21,10 @@ class Round
       @number_correct += 1
     end
     @index_start += 1
-    # binding.pry
   end
-
-  # def number_correct
-  #   @correct_guess
-  #   # += 1
-  #   # if @guesses.last.correct?
-  #   #       @correct_guess += 1
-  #   # end
-  #     # @correct_guess
-  # end
 
   def percent_correct
     ((@number_correct.to_f / @guesses.length.to_f ) * 100)
   end
-  #   @guesses.select do |guess|
-  #     if guess.correct?
-  #       @correct_guess += 1
-  #     end
-  #   end
-  #   @correct_guess
-  # end
+
 end

@@ -1,6 +1,5 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require 'pry'
 require './lib/guess'
 require './lib/card'
 
@@ -24,10 +23,8 @@ class GuessTest < Minitest::Test
     card2 = Card.new("Queen", "Clubs")
     guess = Guess.new("2 of Diamonds", card2)
 
-    assert_instance_of Card, guess.card
-    # is an instance of the class Card enough or should it be equal to an actual card suit and value so that the test would be stronger as refactor
-
-    should say assert_equal card, guess.card
+    # assert_instance_of Card, guess.card
+    assert_equal card2, guess.card
   end
 
   def test_guess_has_response

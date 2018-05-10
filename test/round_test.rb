@@ -4,15 +4,13 @@ require './lib/guess'
 require './lib/card'
 require './lib/deck'
 require './lib/round'
-require 'pry'
 
 class RoundTest < Minitest::Test
 
   def test_it_exists
     card_1 = Card.new("3","Hearts")
     card_2 = Card.new("4", "Clubs")
-    card_3 = Card.new("5", "Diamonds")
-    deck = Deck.new([card_1, card_2, card_3])
+    deck = Deck.new([card_1, card_2])
     round = Round.new(deck)
 
     assert_instance_of Round, round
@@ -21,8 +19,7 @@ class RoundTest < Minitest::Test
   def test_round_has_deck
     card_1 = Card.new("3","Hearts")
     card_2 = Card.new("4", "Clubs")
-    card_3 = Card.new("5", "Diamonds")
-    deck = Deck.new([card_1, card_2, card_3])
+    deck = Deck.new([card_1, card_2])
     round = Round.new(deck)
 
     assert_instance_of Deck, round.deck
@@ -31,8 +28,7 @@ class RoundTest < Minitest::Test
   def test_start_with_an_empty_array_of_guesses
     card_1 = Card.new("3","Hearts")
     card_2 = Card.new("4", "Clubs")
-    card_3 = Card.new("5", "Diamonds")
-    deck = Deck.new([card_1, card_2, card_3])
+    deck = Deck.new([card_1, card_2])
     round = Round.new(deck)
 
     assert_equal [], round.guesses
@@ -41,48 +37,25 @@ class RoundTest < Minitest::Test
   def test_round_has_a_current_card
     card_1 = Card.new("3","Hearts")
     card_2 = Card.new("4", "Clubs")
-    card_3 = Card.new("5", "Diamonds")
     guess = Guess.new("3 of Hearts", card_1)
-    deck = Deck.new([card_1, card_2, card_3])
+    deck = Deck.new([card_1, card_2])
     round = Round.new(deck)
 
     assert_equal card_1, round.current_card
   end
 
-  # def test_it_has_a_different_current_card
-  #   card_1 = Card.new("3","Hearts")
-  #   card_2 = Card.new("4", "Clubs")
-  #   card_3 = Card.new("5", "Diamonds")
-  #   deck = Deck.new([card_1, card_2, card_3])
-  #   round = Round.new(deck)
-  #   current_card = card_2
-  #
-  #   assert_equal card_2, round.current_card
-  # end
-
-  def test_round_can_record_guess
+  def test_round_can_record_guess_and_count
     card_1 = Card.new("3","Hearts")
     card_2 = Card.new("4", "Clubs")
-    card_3 = Card.new("5", "Diamonds")
     guess = Guess.new("3 of Hearts", card_1)
-    deck = Deck.new([card_1, card_2, card_3])
+    deck = Deck.new([card_1, card_2])
     round = Round.new(deck)
 
     guess1 = round.record_guess('3 of Hearts')
-
     assert_equal '3 of Hearts', round.guesses[0].response
 
     assert_equal 1, round.guesses.count
     refute round.guesses.empty?
-  end
-
-  def test_round_has_a_different_guesses
-    card_1 = Card.new("3","Hearts")
-    card_2 = Card.new("4", "Clubs")
-    card_3 = Card.new("5", "Diamonds")
-    deck = Deck.new([card_1, card_2, card_3])
-    round = Round.new(deck)
-
   end
 
   def test_first_guesses_has_feedback
@@ -93,7 +66,6 @@ class RoundTest < Minitest::Test
     round = Round.new(deck)
 
     round.record_guess("3 of Hearts")
-    # assert_instance_of Guess, round.record_guess("3 of Hearts")
     assert_equal 1, round.guesses.count
     assert_equal "Correct!", round.guesses.first.feedback
   end
@@ -117,11 +89,10 @@ class RoundTest < Minitest::Test
     round = Round.new(deck)
 
     round.record_guess('3 of Hearts')
-# binding.pry
     assert_equal card_2, round.current_card
   end
 
-  def test_record_next_guess
+  def test_record_next_guess_and_count_increase
     card_1 = Card.new("3","Hearts")
     card_2 = Card.new("4", "Clubs")
     card_3 = Card.new("5", "Diamonds")
@@ -132,19 +103,6 @@ class RoundTest < Minitest::Test
     guess2 = round.record_guess('Jack of Diamonds')
 
     assert_equal 'Jack of Diamonds', round.guesses[1].response
-  end
-
-
-  def test_round_guesses_count_increase
-    card_1 = Card.new("3","Hearts")
-    card_2 = Card.new("4", "Clubs")
-    card_3 = Card.new("5", "Diamonds")
-    deck = Deck.new([card_1, card_2, card_3])
-    round = Round.new(deck)
-
-    round.record_guess('3 of Hearts')
-    round.record_guess("Jack of Diamonds")
-
     assert_equal 2, round.guesses.count
   end
 
@@ -187,8 +145,4 @@ class RoundTest < Minitest::Test
     assert_equal 50, round.percent_correct
   end
 
-
-# adding number variable to card class
-
 end
-# adding rakefile
